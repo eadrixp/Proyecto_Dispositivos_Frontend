@@ -9,7 +9,7 @@ const productData: Product[] = [
     image: ProductOne,
     name: 'Apple Watch Series 7',
     category: 'Electronics',
-    price: 296,
+    price: 29644,
     sold: 22,
     profit: 45,
   },
