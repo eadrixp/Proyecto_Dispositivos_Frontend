@@ -9,7 +9,13 @@ const TablePedidos: React.FC = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
-  const [filters, setFilters] = useState<{ id?: number; status?: string }>({});
+
+  const [filters, setFilters] = useState<{
+    id?: number;
+    status?: string;
+    startDate?: string;
+    endDate?: string;
+  }>({});
 
   // 👇 estados para los modales
   const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
@@ -37,8 +43,9 @@ const TablePedidos: React.FC = () => {
         Pedidos
       </h2>
 
-      {/*  Filtros */}
-      <div className="flex gap-4 mb-4">
+      {/* 🔍 Filtros */}
+      <div className="flex flex-wrap gap-4 mb-4 items-end">
+        {/* Buscar por ID */}
         <input
           type="number"
           placeholder="Buscar por ID"
@@ -47,6 +54,8 @@ const TablePedidos: React.FC = () => {
             setFilters({ ...filters, id: Number(e.target.value) || undefined })
           }
         />
+
+        {/* Estado */}
         <select
           className="p-2 border rounded"
           onChange={(e) =>
@@ -62,6 +71,32 @@ const TablePedidos: React.FC = () => {
           <option value="Entregado">Entregado</option>
           <option value="Cancelado">Cancelado</option>
         </select>
+
+        {/* Fecha inicio */}
+        <div>
+          <label className="block text-sm mb-1">Fecha inicio</label>
+          <input
+            type="date"
+            className="p-2 border rounded"
+            onChange={(e) =>
+              setFilters({ ...filters, startDate: e.target.value || undefined })
+            }
+          />
+        </div>
+
+        {/* Fecha fin */}
+        <div>
+          <label className="block text-sm mb-1">Fecha fin</label>
+          <input
+            type="date"
+            className="p-2 border rounded"
+            onChange={(e) =>
+              setFilters({ ...filters, endDate: e.target.value || undefined })
+            }
+          />
+        </div>
+
+        {/* Límite por página */}
         <select
           className="p-2 border rounded"
           value={limit}
@@ -73,7 +108,7 @@ const TablePedidos: React.FC = () => {
         </select>
       </div>
 
-      {/*  Tabla */}
+      {/* 📋 Tabla */}
       <table className="w-full border-collapse border border-gray-300 text-left">
         <thead>
           <tr className="bg-gray-100">
@@ -103,7 +138,6 @@ const TablePedidos: React.FC = () => {
                 </td>
                 <td className="border p-2">{o.address}</td>
                 <td className="border p-2 flex gap-2">
-                  {/* ✅ Botón actualizar */}
                   <button
                     className="bg-primary px-3 py-1 text-white rounded-md hover:bg-blue-600"
                     onClick={() => {
@@ -113,8 +147,6 @@ const TablePedidos: React.FC = () => {
                   >
                     Actualizar
                   </button>
-
-                  {/* ✅ Botón eliminar */}
                   <button
                     className="bg-red-500 px-3 py-1 text-white rounded-md hover:bg-red-600"
                     onClick={() => {
@@ -124,13 +156,12 @@ const TablePedidos: React.FC = () => {
                   >
                     Eliminar
                   </button>
-                  {/*  Botón ver */}
                   <button
-                  className="bg-green-600 px-3 py-1 text-white rounded-md"
-                  onClick={() => {
-                    setSelectedOrderId(o.id);
-                    setIsViewModalOpen(true);
-                  }}
+                    className="bg-green-600 px-3 py-1 text-white rounded-md"
+                    onClick={() => {
+                      setSelectedOrderId(o.id);
+                      setIsViewModalOpen(true);
+                    }}
                   >
                     Ver
                   </button>
@@ -147,7 +178,7 @@ const TablePedidos: React.FC = () => {
         </tbody>
       </table>
 
-      {/*  Paginación */}
+      {/* 📌 Paginación */}
       <div className="flex justify-between items-center mt-4">
         <button
           disabled={page <= 1}
@@ -168,7 +199,7 @@ const TablePedidos: React.FC = () => {
         </button>
       </div>
 
-      {/* ✅ Modal actualizar */}
+      {/* 🔧 Modales */}
       {isUpdateModalOpen && selectedOrderId && (
         <ActualizarPedido
           orderId={selectedOrderId}
@@ -178,7 +209,6 @@ const TablePedidos: React.FC = () => {
         />
       )}
 
-      {/* ✅ Modal eliminar */}
       {isDeleteModalOpen && selectedOrderId && (
         <EliminarPedido
           orderId={selectedOrderId}
@@ -186,10 +216,13 @@ const TablePedidos: React.FC = () => {
           onClose={() => setIsDeleteModalOpen(false)}
           onDeleted={fetchOrders}
         />
-
-       
       )}
-      
+
+      <VerPedido
+        orderId={selectedOrderId}
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+      />
     </div>
   );
 };

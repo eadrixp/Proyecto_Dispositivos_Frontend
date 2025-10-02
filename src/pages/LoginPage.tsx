@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
       console.log("Token JWT generado:", token); // <-- Aquí lo mostramos en consola
 
       alert("Login exitoso ✅");
-      navigate("/dashboard-clientes"); // Redirige a la ruta deseada
+      navigate("/dashboard-ecommerce"); // Redirige a la ruta deseada
     } catch (err) {
       alert("Credenciales incorrectas ❌");
     }
@@ -46,8 +46,20 @@ const LoginPage: React.FC = () => {
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
           Entrar
         </button>
+       
+       <div className="mt-4 text-center text-sm">
+        <button
+        type="button"
+        onClick={() => navigate("/auth/signup")}
+        className="text-blue-500 hover:underline">
+          Registrarse
+        </button>
+
+       </div>
       </form>
+      
     </div>
+    
   );
 };
 
