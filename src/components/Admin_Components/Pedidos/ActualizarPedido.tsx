@@ -22,11 +22,11 @@ const ActualizarPedido: React.FC<ActualizarPedidoProps> = ({
   const handleUpdate = async () => {
     try {
       await updateOrderStatus(orderId, statusId);
-      Swal.fire("✅ Éxito", "El estado del pedido fue actualizado", "success");
+      Swal.fire(" Éxito", "El estado del pedido fue actualizado", "success");
       onUpdated();
       onClose();
     } catch (err) {
-      Swal.fire("❌ Error", "No se pudo actualizar el pedido", "error");
+      Swal.fire(" Error", "No se pudo actualizar el pedido", "error");
     }
   };
 

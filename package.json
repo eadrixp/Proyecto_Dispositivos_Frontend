@@ -18,6 +18,8 @@
     "axios": "^1.12.2",
     "flatpickr": "^4.6.13",
     "headlessui": "^0.0.0",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
     "jsvectormap": "^1.5.3",
     "leaflet": "^1.9.4",
     "match-sorter": "^6.3.1",

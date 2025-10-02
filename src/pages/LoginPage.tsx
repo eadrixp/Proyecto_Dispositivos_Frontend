@@ -15,13 +15,13 @@ const LoginPage: React.FC = () => {
       const res = await api.post("/auth/login", { email, password });
       const token = res.data.data.accessToken;
 
-      login(token); // Guarda token en contexto y localStorage
-      console.log("Token JWT generado:", token); // <-- Aquí lo mostramos en consola
+      login(token); 
+      console.log("Token JWT generado:", token); 
 
-      alert("Login exitoso ✅");
-      navigate("/dashboard-ecommerce"); // Redirige a la ruta deseada
+      alert("Login exitoso ");
+      navigate("/dashboard-ecommerce"); 
     } catch (err) {
-      alert("Credenciales incorrectas ❌");
+      alert("Credenciales incorrectas ");
     }
   };
 
