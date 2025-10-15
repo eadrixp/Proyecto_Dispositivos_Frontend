@@ -18,7 +18,7 @@ const TableProductos: React.FC = () => {
   const fetchProducts = async () => {
     try {
       const data = await getAllProducts();
-      setProducts(data);
+      setProducts(data.data);
     } catch (err) {
       console.error("Error al obtener productos:", err);
       setAlert({
@@ -84,7 +84,7 @@ const TableProductos: React.FC = () => {
             <tr key={p.id}>
               <td className="border p-2">{p.code}</td>
               <td className="border p-2">{p.name}</td>
-              <td className="border p-2">${p.price}</td>
+              <td className="border p-2">Q {p.price}</td>
               <td className="border p-2">{p.stock}</td>
               <td className="border p-2 flex gap-2">
                 <button
