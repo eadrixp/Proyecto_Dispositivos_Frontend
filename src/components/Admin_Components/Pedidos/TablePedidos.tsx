@@ -132,7 +132,7 @@ const TablePedidos: React.FC = () => {
                 <td className="border p-2">{o.client_name}</td>
                 <td className="border p-2">{o.user_name}</td>
                 <td className="border p-2">{o.status}</td>
-                <td className="border p-2">${o.total}</td>
+                <td className="border p-2">Q {o.total}</td>
                 <td className="border p-2">
                   {new Date(o.created_at).toLocaleDateString()}
                 </td>

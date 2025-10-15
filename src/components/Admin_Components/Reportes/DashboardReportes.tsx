@@ -16,7 +16,7 @@ const DashboardReportes: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(false);
   const [filterId, setFilterId] = useState<number | "">("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1); // Para la paginación (actualmente no se utiliza)
 
   // Cargar pedidos
   const loadOrders = async () => {
